@@ -3,6 +3,7 @@
 
 
 from tkinter import *
+import tkinter as tk
 #from tkinter.ttk import *
 import time
 from protocol2 import byte
@@ -12,6 +13,8 @@ class eeprom_frame(LabelFrame):
 
 	def __init__(self,window,protocol,id):
 		super().__init__(text="EEPROM")
+		
+		
 		self.protocol = protocol
 		self.id = id
 		#self["width"]=200
@@ -20,6 +23,29 @@ class eeprom_frame(LabelFrame):
 		self.entries = {}
 		self.variables = {}
 		self.row = 0
+		
+	
+		scrollFrame=Frame(window)
+		scrollFrame.grid(row=0, column=1, sticky='nw')
+		scrollFrame.grid_rowconfigure(0, weight=1)
+		scrollFrame.grid_columnconfigure(0, weight=1)
+		#scrollFrame.pack(expand = True, fill=BOTH)
+ 
+ 
+		self.canvas = Canvas(scrollFrame, width = 300,height = 1000)
+		
+		# Add a canvas in that frame
+		#self.canvas = tk.Canvas(scrollFrame)
+		self.canvas.grid(row=0, column=0, sticky="news")
+
+		# Link a scrollbar to the canvas
+		vsb = tk.Scrollbar(scrollFrame, orient="vertical", command=self.canvas.yview)
+		vsb.grid(row=0, column=1, sticky='ns')
+		self.canvas.configure(yscrollcommand=vsb.set)
+
+		# Create a frame to contain the list
+		self.frame_list = tk.Frame(self.canvas)
+		self.canvas.create_window((0, 0), window=self.frame_list, anchor='nw')
 
 		
 		self.gui_spacer("")
@@ -76,13 +102,19 @@ class eeprom_frame(LabelFrame):
 		self.gui_entry("EWMA encoder", "ewma_encoder", 0, True, True, True, 0x54, 1, 1 )
 
 		# update button
-		button_update = Button(self,text="Update",command = self.read_all)
-		button_update.grid(column = 2, row = 0, sticky='we')
+		button_update = Button(self.frame_list,text="Update",command = self.read_all)
+		button_update.grid(column = 0, row = 0, sticky='we')
+
+		#window.config(width=200, height=1000)
+
+		# Set the canvas scrolling region
+		self.canvas.config(scrollregion=(0,0,1600,1600))
+	
 
 		self.read_all()
 
 	def gui_entry(self,text_label,variable_name,variable_value,has_local,has_servo,has_callback,callback_reg_address,callback_reg_scale,callback_reg_size):
-		self.labels[variable_name] = Label(self, text = text_label, anchor="w", justify=LEFT)
+		self.labels[variable_name] = Label(self.frame_list, text = text_label, anchor="w", justify=LEFT)
 		self.labels[variable_name].grid(column = 0, row = self.row, sticky='w')
 		if has_local:
 			self.variables[variable_name+"_local"] = StringVar()
@@ -91,10 +123,10 @@ class eeprom_frame(LabelFrame):
 			self.variables[variable_name+"_servo"] = StringVar()
 			self.variables[variable_name+"_servo"].set("empty")
 		if has_local:
-			self.entries[variable_name+"_local"] = Entry(self, width = 15, textvariable = self.variables[variable_name+"_local"]) 
+			self.entries[variable_name+"_local"] = Entry(self.frame_list, width = 5, textvariable = self.variables[variable_name+"_local"])
 			self.entries[variable_name+"_local"].grid(column = 1, row = self.row)
 		if has_servo:
-			self.entries[variable_name+"_servo"] = Entry(self, width = 15, state="readonly", textvariable = self.variables[variable_name+"_servo"]) 
+			self.entries[variable_name+"_servo"] = Entry(self.frame_list, width = 5, state="readonly", textvariable = self.variables[variable_name+"_servo"])
 			self.entries[variable_name+"_servo"].grid(column = 2, row = self.row)
 		if has_local and has_callback:
 			self.entries[variable_name+"_local"].bind('<Return>', (lambda _: self.callback_entry(variable_name,callback_reg_address,callback_reg_scale,callback_reg_size)))
@@ -126,7 +158,7 @@ class eeprom_frame(LabelFrame):
 
 
 	def gui_spacer(self,text_label):
-		label = Label(self, text = text_label, anchor="w", justify=LEFT)
+		label = Label(self.frame_list, text = text_label, anchor="w", justify=LEFT)
 		label.grid(column = 0, row = self.row, sticky='w')
 		self.row += 1		
 

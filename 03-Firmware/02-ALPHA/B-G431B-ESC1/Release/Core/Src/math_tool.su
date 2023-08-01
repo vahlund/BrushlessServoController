@@ -1,0 +1,5 @@
+math_tool.c:11:9:constrain	0	static
+math_tool.c:21:7:fconstrain	0	static
+math_tool.c:31:10:map	4	static
+math_tool.c:41:7:fmap	0	static
+math_tool.c:51:7:normalize_angle	8	static

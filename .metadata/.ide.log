@@ -1,0 +1,11 @@
+2021-10-08 15:26:12,789 [INFO] Activator:170 - 
+
+
+2021-10-08 15:26:12,791 [INFO] Activator:171 - !SESSION log4j initialized
+2021-10-08 15:26:13,265 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 
+2023-08-01 12:11:47,896 [INFO] Activator:177 - 
+
+
+2023-08-01 12:11:47,898 [INFO] Activator:178 - !SESSION log4j initialized
+2023-08-01 12:11:49,661 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 
+2023-08-01 12:11:51,376 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com

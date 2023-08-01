@@ -1,0 +1,13 @@
+!SESSION 2023-08-01 12:13:09.483 -----------------------------------------------
+eclipse.buildId=Version 1.8.0
+java.version=11.0.11
+java.vendor=AdoptOpenJDK
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_SE
+Framework arguments:  -keyring /Users/Victor/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -keyring /Users/Victor/.eclipse_keyring
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-08-01 12:13:47.682
+!MESSAGE Log4j initialized with config file /Users/Victor/Library/Mobile Documents/com~apple~CloudDocs/Projects/Window Cover v2/BrushlessServoController/03-Firmware/02-ALPHA/B-G431B-ESC1/.metadata/.log4j.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-08-01 12:13:49.819
+!MESSAGE Started RMI Server, listening on port 41337
